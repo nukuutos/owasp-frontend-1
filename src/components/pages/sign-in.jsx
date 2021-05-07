@@ -3,7 +3,7 @@ import Input from '../utils/form/input';
 import { Formik, Form } from 'formik';
 import useAsyncAction from '../../hooks/use-async-action/use-async-action';
 
-const SignIn = ({ setAlerts }) => {
+const SignIn = ({ setAlerts, setAccessToken }) => {
   const [asyncAction] = useAsyncAction();
 
   return (
@@ -18,6 +18,8 @@ const SignIn = ({ setAlerts }) => {
         };
 
         const data = await asyncAction(config, setAlerts);
+
+        if (data) setAccessToken(data.accessToken);
       }}>
       {({ isSubmitting }) => (
         <Form className="sign-in">
@@ -33,7 +35,7 @@ const SignIn = ({ setAlerts }) => {
             disabled={isSubmitting}
             type="submit"
             className={`sign-in__btn btn btn--primary btn--flat 
-            ${isSubmitting ? 'btn--spinner btn--submitted' : ''} mt-m-1`}>
+            ${isSubmitting ? 'btn--spinner btn--submitted' : ''} mt-m-2`}>
             Submit
           </button>
         </Form>

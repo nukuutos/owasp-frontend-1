@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Alert = ({ alertsState }) => {
   const [alerts, setAlerts] = alertsState;
   const [isShow, setIsShow] = useState(false);
 
-  const popUpAnimationDuration = 2000;
-  const alertAnimationDuration = 2000;
-
-  const animationDuration = alertAnimationDuration + popUpAnimationDuration;
+  const isShowRef = useRef();
+  isShowRef.current = isShow;
 
   useEffect(() => {
-    console.log(alerts);
+    const popUpAnimationDuration = 2000;
+    const alertAnimationDuration = 2000;
 
-    if (alerts.length && !isShow) {
+    const animationDuration = alertAnimationDuration + popUpAnimationDuration;
+
+    if (alerts.length && !isShowRef.current) {
       setIsShow(true);
 
       setTimeout(() => {
@@ -25,7 +26,7 @@ const Alert = ({ alertsState }) => {
     }
 
     // without cleanup function!
-  }, [alerts.length]);
+  }, [alerts.length, setAlerts]);
 
   // for animation not using {alerts[0] && component}
 

@@ -19,7 +19,7 @@ const asyncCall = async (config, setAlerts) => {
 
     setAlerts((alerts) => [...alerts, { message: data.message, status }]);
 
-    return error;
+    return null;
   }
 };
 
