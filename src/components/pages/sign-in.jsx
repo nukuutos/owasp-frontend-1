@@ -8,7 +8,7 @@ const SignIn = ({ setAlerts, setAccessToken }) => {
 
   return (
     <Formik
-      initialValues={{ username: 'formik', password: '' }}
+      initialValues={{ username: '', password: '' }}
       onSubmit={async (values) => {
         // async
         const config = {
@@ -19,7 +19,10 @@ const SignIn = ({ setAlerts, setAccessToken }) => {
 
         const data = await asyncAction(config, setAlerts);
 
-        if (data) setAccessToken(data.accessToken);
+        if (data) {
+          setAccessToken(data.accessToken);
+          console.log('Your access token: ', data.accessToken);
+        }
       }}>
       {({ isSubmitting }) => (
         <Form className="sign-in">
